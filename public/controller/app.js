@@ -14,7 +14,7 @@ const routes = [
     {path: '/profile', view: ProfileView, controller: ProfileController}
 ];
 
-const router = new Router(routes);
+export const router = new Router(routes);
 
 router.navigate(window.location.pathname);
 
@@ -52,4 +52,15 @@ document.getElementById('logoutButton').onclick = async function(e){
         const errorMessage = e.message;
         alert('Sign out failed:' + errorCode + ','+ errorMessage);
     }
+}
+
+document.getElementById('gotoCreateAccount').onclick = function(e){
+    document.getElementById('loginDiv').classList.replace('d-block','d-none');
+    document.getElementById('CreateAccountDiv').classList.replace('d-none','d-block');
+    document.forms.createAccountForm.reset();
+}
+
+document.getElementById('gotoLogin').onclick = function(e){
+    document.getElementById('CreateAccountDiv').classList.replace('d-block','d-none');
+    document.getElementById('loginDiv').classList.replace('d-none','d-block');
 }
