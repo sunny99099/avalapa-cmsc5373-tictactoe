@@ -3,7 +3,8 @@ import {ProfileView} from '../view/ProfileView.js';
 import {HomeController} from './HomeController.js';
 import {ProfileController} from './ProfileController.js';
 import {Router} from './Router.js';
-import {loginFirebase,logoutFirebase} from './firebase_auth.js';
+import {loginFirebase,logoutFirebase,createAccount} from './firebase_auth.js';
+import {startspinner,stopspinner} from '../view/util.js';
 
 
 document.getElementById('appHeader').textContent="Cloud Web Templete";
@@ -30,10 +31,13 @@ document.forms.loginForm.onsubmit = async function(e){
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    startspinner();
     try{
         await loginFirebase(email, password);
+        stopspinner();
         console.log('user logged in', email);
     } catch(e){
+        stopspinner();
         console.error('Error logging in', e);
         const errorCode = e.code;
         const errorMessage = e.message;
@@ -43,10 +47,13 @@ document.forms.loginForm.onsubmit = async function(e){
 }
 
 document.getElementById('logoutButton').onclick = async function(e){
+    startspinner();
     try{
         await logoutFirebase();
+        stopspinner();
         console.log('user logged out');
     } catch(e){
+        // stopspinner();
         console.error('Error logging out', e);
         const errorCode = e.code;
         const errorMessage = e.message;
@@ -54,10 +61,32 @@ document.getElementById('logoutButton').onclick = async function(e){
     }
 }
 
+document.forms.CreateAccountForm.onsubmit = async function(e){
+    e.preventDefault();
+    const email = e.target.email.value;
+    const emailConform = e.target.emailConform.value;
+    if(email !== emailConform){
+        alert('Emails do not match');
+        return;
+    }
+    const password = e.target.password.value;
+    // startspinner();
+    try{
+        await createAccount(email, password);
+        stopspinner();
+        document.getElementById('CreateAccountDiv').classList.replace('d-block','d-none');
+    } catch(e){
+        stopspinner();
+        console.error('Error creating user', e);
+        const errorCode = e.code;
+        const errorMessage = e.message;
+        alert('Create account failed:' + errorCode + ','+ errorMessage);
+    }
+}
+
 document.getElementById('gotoCreateAccount').onclick = function(e){
     document.getElementById('loginDiv').classList.replace('d-block','d-none');
     document.getElementById('CreateAccountDiv').classList.replace('d-none','d-block');
-    document.forms.createAccountForm.reset();
 }
 
 document.getElementById('gotoLogin').onclick = function(e){
