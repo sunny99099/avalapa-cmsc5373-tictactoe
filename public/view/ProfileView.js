@@ -1,4 +1,4 @@
-import { AbstractView } from "AbstractView.js";
+import { AbstractView } from './AbstractView.js';
 
 export class ProfileView extends AbstractView {
     controiller = null;

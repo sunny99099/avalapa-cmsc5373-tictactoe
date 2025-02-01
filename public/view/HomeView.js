@@ -1,4 +1,4 @@
-import { AbstractView } from "AbstractView.js";
+import { AbstractView } from "./AbstractView.js";
 
 export class HomeView extends AbstractView {
     controiller = null;
@@ -12,7 +12,7 @@ export class HomeView extends AbstractView {
     async updateView() {
         console.log('HomeView.updateView() is called');
         const div = document.createElement('div');
-        div.innerHTML = 'HomeView';
+        div.innerHTML = 'Home View';
         return div;
     }
     attachEvents() {

@@ -16,9 +16,9 @@ export class AbstractView{
 
     async render(){
      this.parentElement.innerHTML='';
-     const elements = this.updateView();
+     const elements =await this.updateView();
      this.parentElement.append(elements);
-     this.addachEvents();
+     this.attachEvents();
     }
     
     async updateView(){
