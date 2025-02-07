@@ -7,8 +7,8 @@ import {loginFirebase,logoutFirebase,createAccount} from './firebase_auth.js';
 import {startspinner,stopspinner} from '../view/util.js';
 
 
-document.getElementById('appHeader').textContent="Cloud Web Templete";
-document.title="App Templete";
+document.getElementById('appHeader').textContent="Play TicTacToe!";
+document.title="TicTacToe";
 
 const routes = [
     {path: '/', view: HomeView, controller: HomeController},
