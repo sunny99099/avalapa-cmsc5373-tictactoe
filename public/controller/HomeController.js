@@ -44,9 +44,9 @@ export class HomeController {
         //if vsRandom, computer makes a move
         if(this.model.winner == null && this.model.playStrategy == GamePlayStrategy.VS_RANDOM){
             const pos = this.model.computerMove();
-            startSpinner();
+            startspinner();
             await sleep(1000);
-            stopSpinner();
+            stopspinner();
             this.model.move(pos);
             //check game result again
             this.model.winner = this.model.getGameResult();
